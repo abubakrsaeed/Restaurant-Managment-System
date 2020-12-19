@@ -1,0 +1,18 @@
+create table Manager(
+ID int auto_increment,
+mUserName varchar(40) NOT NULL,
+passWord varchar(40) NOT NULL,
+primary key (ID));
+
+create table Employee(
+ID int auto_increment,
+eUserName varchar(40) NOT NULL,
+passWord varchar(40) NOT NULL,
+salary double NOT Null,
+primary key (ID));
+
+create table Menu(
+ID int auto_increment,
+name varchar(20),
+price double NOT NULL,
+primary key (ID));
