@@ -3,10 +3,10 @@
 
 Group Members:
 
--Sefa Şenlik
--Abubakr Saeed
--Bilal Raza
--Jabagh Anjouk
+- Sefa Şenlik
+- Abubakr Saeed
+- Bilal Raza
+- Jabagh Anjouk
 
 Project Description:
 
