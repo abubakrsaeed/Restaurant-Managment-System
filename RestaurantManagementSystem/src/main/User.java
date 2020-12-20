@@ -24,15 +24,4 @@ public class User {
 	
 
 	
-	public static int userLogin() throws SQLException {
-		
-		ArrayList<String> tempData = new ArrayList<String>();
-		String query = "SELECT * FROM UserInfo WHERE username = \""+ username +"\";";
-		tempData = con.getData(query);
-
-		//if ()
-		return 0;
-	}
-	
-	
 }
