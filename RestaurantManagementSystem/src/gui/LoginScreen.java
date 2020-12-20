@@ -41,7 +41,7 @@ public class LoginScreen extends Frame implements WindowListener, ActionListener
         d.init();
         String i_uname = tf_uname.getText();
         String i_pass = MD5.getMd5(tf_pass.getText());
-        System.out.println(i_uname+"      "+i_pass);
+        
 		
 		//check type of user and user existince 
 		
