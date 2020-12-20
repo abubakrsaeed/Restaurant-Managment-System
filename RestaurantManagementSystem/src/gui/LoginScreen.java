@@ -34,11 +34,19 @@ public class LoginScreen extends Frame implements WindowListener, ActionListener
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		String i_uname = tf_uname.getText();
-		String i_pass = tf_pass.getText();
+		
+		//init a connection to database
+	
+		DBConnection d = new DBConnection();
+        d.init();
+        String i_uname = tf_uname.getText();
+        String i_pass = MD5.getMd5(tf_pass.getText());
+        System.out.println(i_uname+"      "+i_pass);
+		
+		//check type of user and user existince 
 		
 		for(int i=0; i<credentials.length; ++i){
-			if(credentials[i][0].contentEquals(i_uname) && credentials[i][1].contentEquals(i_pass)) {
+			if(d.getManager(i_uname,i_pass)||d.getEmployee(i_uname,i_pass)) {
 				System.out.print("Login success!");
 				loginSuccess();
 				return;
