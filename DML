@@ -1,8 +1,0 @@
-INSERT INTO Manager (mUserName,password)  VALUES('Jax Teller',MD5("abc123"));
-
-
-INSERT INTO Employee (eUserName,password,salary)  VALUES('Bruce Wayne',MD5("123"),3000);
-
-insert into Menu(name,price) values('Beef Steak',650);
-insert into Menu(name,price) values('Lahmacun',35);
-insert into Menu(name,price) values('Tikka Masala',500);
