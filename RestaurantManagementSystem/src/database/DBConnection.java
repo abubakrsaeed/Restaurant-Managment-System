@@ -99,4 +99,41 @@ public class DBConnection {
 	
 	
 	
+        public static ResultSet getAllItems(Connection con) throws SQLException
+	{
+
+		Statement statement = null;
+	    ResultSet resultSet = null;
+	 
+	    try
+	    {
+	        statement = con.createStatement();
+	        resultSet = statement.executeQuery("SELECT id, name, price FROM menu");
+	    } catch(SQLException e)
+	    {
+	        e.printStackTrace();
+	    }
+	    
+	    return resultSet;
+	}
+	
+	public static ResultSet getAllUsers(Connection con) throws SQLException
+	{
+
+		Statement statement = null;
+	    ResultSet resultSet = null;
+	    
+	    try
+	    {
+	        statement = con.createStatement();
+	        resultSet = statement.executeQuery("SELECT name, username, usertype FROM users");
+	    }
+	    catch(SQLException e)
+	    {
+	        e.printStackTrace();
+	    }
+	    
+	    return resultSet;
+	}	
+	
 }
