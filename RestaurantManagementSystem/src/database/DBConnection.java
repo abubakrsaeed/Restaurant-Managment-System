@@ -37,14 +37,14 @@ public class DBConnection {
 	
 	public static void createNewUser(Connection conn, String name, String username, String password, String usertype) {
 		try {
-			PreparedStatement ps = conn.prepareStatement("insert into tbl_users values(?,?,?,?);");
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO users VALUES(?,?,?,?);");
 			
 			ps.setString(1, name);
 			ps.setString(2, username);
 			ps.setString(3, password);
 			ps.setString(4, usertype);
 
-			//check x?
+			
 			int x = ps.executeUpdate();
 			if (x > 0) {
 				System.out.println("Successful");
