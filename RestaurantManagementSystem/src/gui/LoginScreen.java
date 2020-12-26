@@ -3,20 +3,15 @@ package gui;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.util.ArrayList;
 
 public class LoginScreen extends Frame implements WindowListener, ActionListener {
-	String[][] credentials = new String[][]{{"sefasenlik", "12345", "adm"}, {"aliveli", "56789", "emp"}}; 
-	String[] menu_items = new String[]{"Burger", "Coke", "Water", "Pizza", "Fries", "Lahmacun"};
-	ArrayList<String> orders = new ArrayList<String>();
+	String[][] credentials = new String[][]{{"sefasenlik", "12345", "adm"}, {"aliveli", "56789", "emp"}, {"testemp", "123", "emp"}, {"testadm", "321", "adm"}}; 
 	
 	TextField tf_uname = new TextField(20);
 	JPasswordField pf_pass = new JPasswordField(18);
 	JLabel jl_uname = new JLabel("Username:"); 
 	JLabel jl_pass = new JLabel("Password:");   
 	Button b_login;
-	
-	Button b_submit_orders;
 	
 	public static void main(String[] args) {
 		LoginScreen myWindow = new LoginScreen("Login Interface");
@@ -57,10 +52,6 @@ public class LoginScreen extends Frame implements WindowListener, ActionListener
 				    "User not found! Incorrect username or password.",
 				    "Login Failed",
 				    JOptionPane.ERROR_MESSAGE);
-		} else if(e.getSource() == b_submit_orders) {
-			for(int i=0; i<orders.size(); ++i){
-				System.out.println(orders.get(i));
-			}
 		}
 	}
 	
@@ -81,6 +72,6 @@ public class LoginScreen extends Frame implements WindowListener, ActionListener
 	}
 	
 	public void loginSuccessAdmin() {
-		
+		new AdminMainScreen("Administration Interface");
 	}
 }

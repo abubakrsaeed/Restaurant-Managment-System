@@ -12,18 +12,22 @@ public class EmployeeOrderScreen extends Frame implements WindowListener, Action
 	Button b_submit_orders;
 	
 	public static void main(String[] args) {
-		EmployeeOrderScreen myWindow = new EmployeeOrderScreen("Employee Order Interface");
+		new EmployeeOrderScreen("Employee Order Interface");
 	}
 	
 	public EmployeeOrderScreen(String title) {
 	    super(title);
-	    setLayout(new FlowLayout());
+	    setLayout(new GridLayout(2,0));
 	    addWindowListener(this);
-	    setSize(300, 120);
+	    setSize(200, 300);
+	    
+	    JPanel scrollPanel = new JPanel();
+	    scrollPanel.setLayout(new GridLayout(0,1));
+	    JScrollPane scrollFrame = new JScrollPane(scrollPanel);
 		
 		for(int i=0; i<menu_items.length; ++i){
 			JCheckBox cb_item_checkbox = new JCheckBox(menu_items[i]);
-			add(cb_item_checkbox);
+			scrollPanel.add(cb_item_checkbox);
 			int index = i;
 			
 			cb_item_checkbox.addItemListener(new ItemListener() {    
@@ -34,6 +38,9 @@ public class EmployeeOrderScreen extends Frame implements WindowListener, Action
 				}    
 	        });
 		}
+		scrollFrame.revalidate();
+		scrollFrame.repaint();
+		add(scrollFrame);
 		
 		b_submit_orders = new Button("Submit Orders");
 		b_submit_orders.addActionListener(this);
