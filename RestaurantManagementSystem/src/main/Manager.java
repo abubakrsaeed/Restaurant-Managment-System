@@ -65,5 +65,41 @@ public class Manager {
 		System.out.print("User type (admin/employee): ");
 	    return reader.readLine(); 
 	}
+	
+	public static void createNewItem(Connection con, String id, String name, int price) {
+		try {
+			PreparedStatement ps = con.prepareStatement("INSERT INTO menu VALUES (?,?,?);");
+
+			ps.setString(1, id);
+			ps.setString(2, name);
+			ps.setInt(3, price);
+
+			if (ps.executeUpdate() == 0) {
+				System.out.println("Create new item unsuccessfull.");
+			} else {
+				System.out.println("Create new item successfull.");
+			}
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+	public static int deleteItem(Connection con, int id) {
+
+		int param = 0;
+		try {
+			PreparedStatement ps = con.prepareStatement("DELETE FROM menu WHERE id LIKE;");
+			ps.setInt(1, id);
+			int exec = ps.executeUpdate();
+			param = exec;
+			System.out.println(exec);
+			if (ps.executeUpdate() == 0) {
+				System.out.println("Item deletion unsuccessfull.");
+				return param;
+			} else {
+				System.out.println("Item deletion successfull");
+				return param;
+			}
+		} catch(Exception e) {	System.out.println(e);	return param; }
+	}
 
 }
