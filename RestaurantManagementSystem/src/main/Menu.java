@@ -4,48 +4,83 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import database.DBConnection;
+
 public class Menu {
 
 	private int order_no;
 	private Employee emp;
+	private int qty;
+	private String name;
 	
-	public Menu(int orderNo, Employee obj) {
+	
+	public Menu(int orderNo, Employee obj,int qty,String name) {
 		order_no = orderNo;
 		emp = obj;
+		this.qty=qty;
+		this.name=name;
 	}
+	
 	
 	
 	public boolean addOrder( String name, int qty) {
-		return emp.getDB().addToOrder(order_no, name, qty, emp.getName());
+		DBConnection db= new DBConnection();
+		db.init();	
+		boolean var=false;
+		var=db.addToOrder(qty, name, qty, emp);
+				
+				return var;
+		
 	}
 	
 	public boolean updateOrderQty( int id, int qty ) {
-		return emp.getDB().updateOrderQty(order_no, id, qty);
+		DBConnection db= new DBConnection();
+		db.init();	
+		boolean var=false;
+		var=db.updateOrderQty(qty, id, qty);
+		return var;
 	}
 	
 	public boolean deleteOrder(int id) {
-		return emp.getDB().deleteOrder(order_no, id);
+		DBConnection db= new DBConnection();
+		db.init();	
+		boolean var=false;
+		var=db.deleteOrder(id);
+		return var;
 	}
 	
 	
 	
-	public String[][] viewCurrentOrder() throws SQLException {
+	public ArrayList<String> viewCurrentOrder() throws SQLException {
+		
+		DBConnection db= new DBConnection();
+		db.init();	
+		
 
-		ResultSet rs = emp.getDB().getCurrentOrder(order_no); 
+		ResultSet rs = db.getCurrentOrder(order_no); 
 
-		ArrayList<String[]> rowList = new ArrayList<String[]>();
+		ArrayList<String> rowList = new ArrayList<String>();
 		int r = 0;
 
 		try {
 			while(rs.next()) {
-				rowList.add(new String[] { rs.getString("id"), rs.getString("name"), String.valueOf(rs.getInt("qty"))});
-				r++;
+				
+				 String id = rs.getString("id");
+	                String name = rs.getString("name");
+	                int qty = rs.getInt("qty");
+	               
+	                ArrayList<String> tempData = new ArrayList<>();
+	               
+	                tempData.add(id);
+	                tempData.add(name);
+	                tempData.add(Integer.toString(qty));
+				
 			}
 		} catch (SQLException e) { e.printStackTrace(); }
 
 		//
 		int c = 3; //size of columns from table - fixed
-		return emp.makeTable(rowList, r, c);
+		return rowList;
 	
 	}
 }
