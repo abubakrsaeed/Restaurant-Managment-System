@@ -124,97 +124,79 @@ public class DBConnection {
 			return false;
 		}
 	}
+	
+	
+//Return a set of menu items to be used in the getAllItems func
+private void itemsSet(ArrayList<ArrayList<String>> dataToReturn, ResultSet rs) {
+        try {
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int price = rs.getInt("price");
+                
+                ArrayList<String> tempData = new ArrayList<>();
+                tempData.add(Integer.toString(id));
+                tempData.add(name);
+                tempData.add(Integer.toString(price));
+               
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-
-	public String authenticateUser(String username, String password, String usertype) throws SQLException
+	
+	//The Func that return a arrayList of all menu items 
+	
+	public ArrayList<ArrayList<String>> getAllItems()
 	{
-//		Statement stmt = null;
-//		ResultSet rs = null;
-
-		try
-		{
-			Statement stmt = null;
-			ResultSet rs = null;
-			stmt = con.createStatement();
-			rs = stmt.executeQuery("SELECT username, password, usertype FROM users");
-
-			while(rs.next())
-			{
-
-				if( username.equals(rs.getString("username") ) && password.equals(rs.getString("password"))) {
-					if(rs.getString("usertype").equals("manager")) {
-						stmt.close();
-//						con.close();
-						rs.close();
-						return "manager";
-					} else if(rs.getString("usertype").equals("employee")) {
-						stmt.close();
-//						con.close();
-						rs.close();
-						return "employee";
-					}//end else-if
-				}//end if
-			}//end while
-		}
-		catch(SQLException e) { e.printStackTrace(); }
-//		stmt.close();
-//		rs.close();
-//		con.close();
-		return "failed";
-	}
-
-
-	public ResultSet getAllItems() throws SQLException
-	{
-
-		Statement stmt = null;
-		ResultSet rs = null;
-
-		try
-		{
-			stmt = con.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM menu;");
-		} catch (SQLException e) { e.printStackTrace(); }
-
-		return rs;
+		 ArrayList<ArrayList<String>> dataToReturn = new ArrayList<>();
+		 try {
+	            ResultSet rs = stmt.executeQuery("SELECT * FROM menu");
+	           itemsSet(dataToReturn, rs);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return dataToReturn;
 	}
 	
+	private void employeeSet(ArrayList<ArrayList<String>> dataToReturn, ResultSet rs) {
+        try {
+            while (rs.next()) {
+               
+                String name = rs.getString("name");
+                String username = rs.getString("username");
+                int salary = rs.getInt("salary");
+               
+                ArrayList<String> tempData = new ArrayList<>();
+               
+                tempData.add(name);
+                tempData.add(username);
+                tempData.add(Integer.toString(salary));
+               
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 	
-//	public static void getAllItems() throws SQLException {
-//		
-//		ResultSet rs = rs_getAllItems();
-//		
-//		ArrayList<String[]> rowList = new ArrayList<String[]>();
-//		
-//			int rows = 0;
-//
-//			try {
-//				while(rs.next()) {
-//					rowList.add(new String[] { rs.getString("id"), rs.getString("name"), String.valueOf(rs.getInt("price"))});
-//					rows++;
-//				}
-//			} catch (SQLException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-//	}
-	
-	
-
-	public ResultSet getAllEmployees () throws SQLException
+	public ArrayList<ArrayList<String>> getAllEmployees()
 	{
-		Statement statement = null;
-		ResultSet rs = null;
-
-		try
-		{
-			statement = con.createStatement();
-			rs = statement.executeQuery("SELECT name, username, salary FROM users;");
-		}
-		catch(SQLException e) {	e.printStackTrace(); }
-
-		return rs;
+		 ArrayList<ArrayList<String>> dataToReturn = new ArrayList<>();
+		 try {
+	            ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE username=?");
+	            pstmt.setString(1, "employee");
+	           itemsSet(dataToReturn, rs);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return dataToReturn;
 	}
+	
+	
+	
+	
+
 
 
 	//change return to String (maybe)
