@@ -9,37 +9,50 @@ import java.sql.Statement;
 
 public class DBConnection {
 	
-	private static Connection con = null;
-	
-	//make constructor, remove set, improve
-	
-	public void setConnection(Connection con) {
-		DBConnection.con = con;
-	}
-	
-	public Connection getConnection() {
-		return con;
-	}
-	
-	public static Connection createConnection() {
+	 private static final String DB_URL = "jdbc:mysql://localhost:3306/project";
+	    private static final String USER = "root";
+	    private static final String PASS = "159357";
 
-		String con_driver = "com.mysql.jdbc.Driver";
-		String con_localHost = "test_database:3306";
-		String con_databaseName = "rms_test_database";
-		String con_userName = "root";
-		String con_password = "root";
-		
-//		Connection connection = null;
+	    private static Connection con = null;
+	    private static Statement stmt = null;
+	    private static PreparedStatement pstmt = null;
 
-		try {
-			Class.forName(con_driver);
-			con = DriverManager.getConnection("jdbc:mysql://"+con_localHost+"/"+con_databaseName+"",con_userName,con_password);	
-		} catch(Exception e1) {
-			System.out.println(e1);
-		}
-		System.out.println(con);
-		return con;
-	}
+	    public void init() {
+	        try {
+
+	            con = DriverManager.getConnection(DB_URL, USER, PASS);
+	            stmt = con.createStatement();
+	            System.out.println("connection initialized");
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            System.out.println("Problem!");
+	        }
+
+	    }//end try
+
+	    public boolean getUser(String name, String pass) {
+	        Boolean var = false;
+
+	        try {
+	            pstmt = con.prepareStatement("SELECT * FROM users WHERE username=? AND password=?");
+	            pstmt.setString(1, name);
+	            pstmt.setString(2, pass);
+	            ResultSet rs = pstmt.executeQuery();
+	            while (rs.next()) {
+                String mEmail = rs.getString("username");	               
+                String password = rs.getString("password");
+	            	String userType =rs.getString("usertype");
+	            
+	                var=true;
+
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return var;
+	    }
+
+
 
 	public boolean createNewUser(String name, String username, String password, int salary, String usertype) {
 		try {
