@@ -125,6 +125,29 @@ public class DBConnection {
 		}
 	}
 	
+	public boolean createNewOrder(int orderNo, String name,int qty,String placedBy) {
+		try {	
+			PreparedStatement ps = con.prepareStatement("INSERT INTO order_ (orderNo_, name, qty,placedBy)  VALUES (?,?,?,?);");
+			ps.setLong(1, orderNo);
+			ps.setString(2, name);
+			ps.setInt(3, qty);
+			ps.setString(4, placedBy);
+
+			int exec = ps.executeUpdate();
+			
+			if ( exec == 0) {
+			System.out.println("Create new order unsuccessfull.");
+				return false;
+			} else {
+				System.out.println("Create new order successfull.");
+				return true;
+			}
+		} catch(Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+	
 	
 //Return a set of menu items to be used in the getAllItems func
 private void itemsSet(ArrayList<ArrayList<String>> dataToReturn, ResultSet rs) {
