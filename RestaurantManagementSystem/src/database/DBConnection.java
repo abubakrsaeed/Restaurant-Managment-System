@@ -30,8 +30,8 @@ public class DBConnection {
 
 	    }//end try
 
-	    public boolean getUser(String name, String pass) {
-	        Boolean var = false;
+	    public String getUserType(String name, String pass) {
+	       String var="";
 
 	        try {
 	            pstmt = con.prepareStatement("SELECT * FROM users WHERE username=? AND password=?");
@@ -43,7 +43,7 @@ public class DBConnection {
                 String password = rs.getString("password");
 	            	String userType =rs.getString("usertype");
 	            
-	                var=true;
+	                var=userType;
 
 	            }
 	        } catch (Exception e) {
@@ -51,6 +51,28 @@ public class DBConnection {
 	        }
 	        return var;
 	    }
+	    public boolean userExistince(String name, String pass) {
+		       boolean var=false;
+
+		        try {
+		            pstmt = con.prepareStatement("SELECT * FROM users WHERE username=? AND password=?");
+		            pstmt.setString(1, name);
+		            pstmt.setString(2, pass);
+		            ResultSet rs = pstmt.executeQuery();
+		            while (rs.next()) {
+	                String mEmail = rs.getString("username");	               
+	                String password = rs.getString("password");
+		            	String userType =rs.getString("usertype");
+		            
+		                var=true;
+
+		            }
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
+		        return var;
+		    }
+
 
 
 
