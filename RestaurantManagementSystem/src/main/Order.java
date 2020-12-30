@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import database.DBConnection;
 
-public class Menu {
+public class Order {
 
 	private int order_no;
 	private Employee emp;
@@ -14,7 +14,7 @@ public class Menu {
 	private String name;
 	
 	
-	public Menu(int orderNo, Employee obj,int qty,String name) {
+	public Order(int orderNo, Employee obj,int qty,String name) {
 		order_no = orderNo;
 		emp = obj;
 		this.qty=qty;
