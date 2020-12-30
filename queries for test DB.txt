@@ -1,0 +1,40 @@
+USE rms_test_database;
+
+Create table users (
+name varchar(50),
+username varchar(50) NOT NULL PRIMARY KEY,
+password varchar(50) not null,
+salary int not null, 
+usertype ENUM('manager', 'employee')
+);
+
+
+INSERT INTO users (name, username, password, salary, usertype) VALUES ('manager', 'manager', 'manager', 0, 'manager');
+INSERT INTO users (name, username, password, salary, usertype) VALUES ('employee', 'employee', 'employee', 2000, 'employee');
+
+
+select * from `users`;
+
+
+CREATE TABLE menu(
+id INT NOT NULL PRIMARY KEY, 
+name VARCHAR(50),
+price INT 
+);
+
+
+
+INSERT INTO menu (id, name, price) VALUES (1, "Coke", 10);
+INSERT INTO menu VALUES (2, "Pepsi", 20);
+INSERT INTO menu VALUES (3, "Lays", 30);
+INSERT INTO menu VALUES (4, "Fanta", 15);
+
+select * from `menu`;
+
+
+CREATE TABLE order_(
+order_no INT PRIMARY KEY NOT NULL UNIQUE ,
+name VARCHAR(50),
+qty INT,
+placedBy VARCHAR(50)
+);
