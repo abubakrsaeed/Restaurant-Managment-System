@@ -3,15 +3,16 @@ package gui;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import database.DBConnection;
 
-public class LoginScreen extends Frame implements WindowListener, ActionListener {
-	String[][] credentials = new String[][]{{"sefasenlik", "12345", "adm"}, {"aliveli", "56789", "emp"}, {"testemp", "123", "emp"}, {"testadm", "321", "adm"}}; 
-	
+public class LoginScreen extends Frame implements WindowListener, ActionListener {	
 	TextField tf_uname = new TextField(20);
 	JPasswordField pf_pass = new JPasswordField(18);
 	JLabel jl_uname = new JLabel("Username:"); 
 	JLabel jl_pass = new JLabel("Password:");   
 	Button b_login;
+	
+	DBConnection mydb;
 	
 	public static void main(String[] args) {
 		LoginScreen myWindow = new LoginScreen("Login Interface");
@@ -38,20 +39,19 @@ public class LoginScreen extends Frame implements WindowListener, ActionListener
 			String i_uname = tf_uname.getText();
 			String i_pass = new String(pf_pass.getPassword());
 			
-			for(int i=0; i<credentials.length; ++i){
-				if(credentials[i][0].contentEquals(i_uname) && credentials[i][1].contentEquals(i_pass)) {
-					System.out.println("Login success!");
-					if(credentials[i][2].contentEquals("adm"))
-						loginSuccessAdmin();
-					else
-						loginSuccessEmployee();
-					return;
-				}
+			mydb = new DBConnection();
+			mydb.init();
+			
+			if(mydb.getUserType(i_uname, i_pass).equals("employee")) {
+				loginSuccessEmployee(i_uname);
+			} else if(mydb.getUserType(i_uname, i_pass).equals("admin")) {
+				loginSuccessAdmin();
+			} else {
+				JOptionPane.showMessageDialog(this,
+					    "User not found! Incorrect username or password.",
+					    "Login Failed",
+					    JOptionPane.ERROR_MESSAGE);				
 			}
-			JOptionPane.showMessageDialog(this,
-				    "User not found! Incorrect username or password.",
-				    "Login Failed",
-				    JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -67,8 +67,9 @@ public class LoginScreen extends Frame implements WindowListener, ActionListener
 	public void windowDeactivated(WindowEvent e) {}
 	public void windowClosed(WindowEvent e) {}
 	
-	public void loginSuccessEmployee() {
-		new EmployeeOrderScreen("Employee Order Interface");
+	public void loginSuccessEmployee(String username) {
+		EmployeeOrderScreen empScreen = new EmployeeOrderScreen("Employee Order Interface");
+		empScreen.employee_username = username;
 	}
 	
 	public void loginSuccessAdmin() {

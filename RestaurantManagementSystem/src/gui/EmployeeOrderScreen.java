@@ -5,11 +5,17 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
 
+import database.DBConnection;
+
 public class EmployeeOrderScreen extends Frame implements WindowListener, ActionListener {
-	String[] menu_items = new String[]{"Burger", "Coke", "Water", "Pizza", "Fries", "Lahmacun"};
+	String employee_username;
+	
+	ArrayList < ArrayList < String >> menu_items;
 	ArrayList<String> orders = new ArrayList<String>();
 	
 	Button b_submit_orders;
+	
+	DBConnection mydb;
 	
 	public static void main(String[] args) {
 		new EmployeeOrderScreen("Employee Order Interface");
@@ -24,16 +30,22 @@ public class EmployeeOrderScreen extends Frame implements WindowListener, Action
 	    JPanel scrollPanel = new JPanel();
 	    scrollPanel.setLayout(new GridLayout(0,1));
 	    JScrollPane scrollFrame = new JScrollPane(scrollPanel);
+	    
+	    mydb = new DBConnection();
+	    mydb.init();
+	    
+	    menu_items = mydb.getAllItems();
 		
-		for(int i=0; i<menu_items.length; ++i){
-			JCheckBox cb_item_checkbox = new JCheckBox(menu_items[i]);
+		for(int i=0; i<menu_items.size(); ++i){
+			String item_label = menu_items.get(i).get(0) + " " + menu_items.get(i).get(1) + " " + menu_items.get(i).get(2);
+			JCheckBox cb_item_checkbox = new JCheckBox(item_label);
 			scrollPanel.add(cb_item_checkbox);
-			int index = i;
 			
+			int index = i;
 			cb_item_checkbox.addItemListener(new ItemListener() {    
 				public void itemStateChanged(ItemEvent e) {
-					if(!orders.contains(menu_items[index])) {
-						orders.add(menu_items[index]);
+					if(!orders.contains(menu_items.get(index).get(1))) {
+						orders.add(menu_items.get(index).get(1));
 					}
 				}    
 	        });
@@ -53,6 +65,7 @@ public class EmployeeOrderScreen extends Frame implements WindowListener, Action
 		if(e.getSource() == b_submit_orders) {
 			for(int i=0; i<orders.size(); ++i){
 				System.out.println(orders.get(i));
+				System.out.println("Database updated: " + mydb.addToOrders(orders.get(i), 1, employee_username));
 			}
 		}
 	}
