@@ -20,17 +20,16 @@ public class DBConnection {
 
 	    public void init() {
 	        try {
-
-	            con = DriverManager.getConnection(DB_URL, USER, PASS);
+			 con = DriverManager.getConnection(DB_URL, USER, PASS);
 	            stmt = con.createStatement();
 	            System.out.println("connection initialized");
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	            System.out.println("Problem!");
 	        }
-
 	    }//end try
 
+	
 	    public String getUserType(String name, String pass) {
 	       String var="";
 
@@ -43,7 +42,6 @@ public class DBConnection {
                 String mEmail = rs.getString("username");	               
                 String password = rs.getString("password");
 	            	String userType =rs.getString("usertype");
-	            
 	                var=userType;
 
 	            }
@@ -52,6 +50,7 @@ public class DBConnection {
 	        }
 	        return var;
 	    }
+	
 	    public boolean userExistince(String name, String pass) {
 		       boolean var=false;
 
@@ -73,9 +72,6 @@ public class DBConnection {
 		        }
 		        return var;
 		    }
-
-
-
 
 	public boolean createNewUser(String name, String username, String password, int salary, String usertype) {
 		try {
@@ -217,11 +213,6 @@ private void itemsSet(ArrayList<ArrayList<String>> dataToReturn, ResultSet rs) {
 	        return dataToReturn;
 	}
 	
-	
-	
-	
-
-
 
 	//change return to String (maybe)
 	public boolean deleteEmployee(String username) {
@@ -358,15 +349,12 @@ private void itemsSet(ArrayList<ArrayList<String>> dataToReturn, ResultSet rs) {
 		}
 	}
 	
-	//create a close connection
+	//close connection
 	public void closeConnection() {
 		try {
 			con.close();
 		} catch (SQLException e) { e.printStackTrace(); }
 	}
-	
-	
-	
 	
 	public int getID(String name, String table) {
 		
