@@ -26,7 +26,7 @@ public abstract class User {
 	
 	
 	//getters
-	public String getlName() { return name; }
+	public String getName() { return name; }
 	public String getUsername() { return username; }
 	public String getPassword() { return password; }
 	public int getSalary() { return salary; }
