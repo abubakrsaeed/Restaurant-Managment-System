@@ -26,11 +26,21 @@ public abstract class User {
 	
 	
 	//getters
-	public String getName() { return name; }
-	public String getUsername() { return username; }
-	public String getPassword() { return password; }
-	public int getSalary() { return salary; }
-	public String getUserType() { return usertype; }
+	public String getName() {
+		return name; 
+	}
+	public String getUsername() {
+		return username; 
+	}
+	public String getPassword() { 
+		return password; 
+	}
+	public int getSalary() {
+		return salary; 
+	}
+	public String getUserType() {
+		return usertype; 
+	}
 	
 	
 	
