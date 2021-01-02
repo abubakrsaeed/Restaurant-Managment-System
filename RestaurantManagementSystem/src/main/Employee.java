@@ -33,11 +33,12 @@ public class Employee extends User {
 		
 		
 		//those should been taken from the GUI
-		int orderNo = 0; Employee obj = null;int qty = 0;String name = null;
-		
-		String placedBy=obj.getlName();
-		
-		Order n=new Order(orderNo,obj,qty,name);
+		int orderNo = Integer.parseInt(generateRandomString()); 
+		Employee obj = null;
+		int qty = 0;
+		String name = null;
+		String placedBy=this.getName();
+		Order n=new Order(orderNo,this,qty,name);
 		
 		db.createNewOrder(orderNo, name, qty, placedBy);
 		
