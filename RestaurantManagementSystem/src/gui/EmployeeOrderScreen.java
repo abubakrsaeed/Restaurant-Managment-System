@@ -10,7 +10,7 @@ import database.DBConnection;
 public class EmployeeOrderScreen extends Frame implements WindowListener, ActionListener {
 	String employee_username;
 	
-	ArrayList < ArrayList < String >> menu_items;
+	ArrayList<ArrayList<String>> menu_items;
 	ArrayList<String> orders = new ArrayList<String>();
 	
 	Button b_submit_orders;
@@ -25,7 +25,7 @@ public class EmployeeOrderScreen extends Frame implements WindowListener, Action
 	    super(title);
 	    setLayout(new GridLayout(2,0));
 	    addWindowListener(this);
-	    setSize(200, 300);
+	    setSize(300, 300);
 	    
 	    JPanel scrollPanel = new JPanel();
 	    scrollPanel.setLayout(new GridLayout(0,1));

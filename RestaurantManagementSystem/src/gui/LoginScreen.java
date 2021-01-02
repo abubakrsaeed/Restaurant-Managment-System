@@ -44,7 +44,7 @@ public class LoginScreen extends Frame implements WindowListener, ActionListener
 			
 			if(mydb.getUserType(i_uname, i_pass).equals("employee")) {
 				loginSuccessEmployee(i_uname);
-			} else if(mydb.getUserType(i_uname, i_pass).equals("admin")) {
+			} else if(mydb.getUserType(i_uname, i_pass).equals("manager")) {
 				loginSuccessAdmin();
 			} else {
 				JOptionPane.showMessageDialog(this,
