@@ -27,7 +27,7 @@ public class Order {
 		DBConnection db= new DBConnection();
 		db.init();	
 		boolean var=false;
-		var=db.addToOrder(qty, name, qty, emp);
+		var=db.addToOrder(order_no, name, qty, emp.getName());
 				
 				return var;
 		
@@ -45,7 +45,7 @@ public class Order {
 		DBConnection db= new DBConnection();
 		db.init();	
 		boolean var=false;
-		var=db.deleteOrder(id);
+		var=db.deleteOrder(order_no, id);
 		return var;
 	}
 	
