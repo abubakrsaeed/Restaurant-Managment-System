@@ -22,34 +22,25 @@ public class Manager extends User {
 	public boolean createNewItem(int id, String name, int price) {
 		DBConnection db= new DBConnection();
 		db.init();
-		
 		boolean var=db.createNewItem(id, name, price);
 		return var;
-	}	
-
+	}
 	
-
 	public boolean updateItem(String name, int price, int update_id) {
 		DBConnection db= new DBConnection();
 		db.init();
 		
 		boolean var=db.updateItem( name, price,update_id);
-		
 		return var;
 	}
-		
 	
 	boolean createNewEmployee(String name, String username, String password, int salary,String usertype) {
 		DBConnection db= new DBConnection();
 		db.init();
-		
 		boolean var=db.createNewUser(name, username, password, salary, usertype);
-		
 		return var;
 	}
 	
-	
-
 	boolean deleteEmployee(String username) {
 		DBConnection db= new DBConnection();
 		db.init();
@@ -84,14 +75,10 @@ public class Manager extends User {
 		DBConnection db= new DBConnection();
 		db.init();
 		
-		ArrayList<ArrayList<String>> var=db.getAllItems();
+		ArrayList<ArrayList<String>> 
+		var=db.getAllItems();
 		
-		return var;
-		
-		
+		return var;	
 	}
-
-	
-
 	
 }
