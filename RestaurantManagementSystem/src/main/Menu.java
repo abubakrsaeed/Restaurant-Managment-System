@@ -4,9 +4,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Menu {
-	int id;
-	String name;
+	
 	int price;
+	String name;
+	int id;
+	
   
 	public Menu(int id, String name,int price) {
 		this.id=id;
