@@ -12,6 +12,7 @@ public class Manager extends User {
 		super(name, username, password, salary, usertype);
 	}
 
+	//delete an item
 	public boolean deleteItem(int id, String table) {
 		DBConnection db= new DBConnection();
 		db.init();
@@ -19,6 +20,7 @@ public class Manager extends User {
 		return var;
 	}
 	
+	//create an item
 	public boolean createNewItem(int id, String name, int price) {
 		DBConnection db= new DBConnection();
 		db.init();
@@ -26,6 +28,7 @@ public class Manager extends User {
 		return var;
 	}
 	
+	//update an existing item
 	public boolean updateItem(String name, int price, int update_id) {
 		DBConnection db= new DBConnection();
 		db.init();
@@ -34,6 +37,7 @@ public class Manager extends User {
 		return var;
 	}
 	
+	//create a new employee
 	boolean createNewEmployee(String name, String username, String password, int salary,String usertype) {
 		DBConnection db= new DBConnection();
 		db.init();
@@ -41,6 +45,7 @@ public class Manager extends User {
 		return var;
 	}
 	
+	//delete an existing employee
 	boolean deleteEmployee(String username) {
 		DBConnection db= new DBConnection();
 		db.init();
@@ -50,7 +55,7 @@ public class Manager extends User {
 		return var;
 	}
 	
-	
+	//update an existing employee
 	boolean updateEmployee(String name,  String password, int salary,String usertype ,String update_username) {
 		DBConnection db= new DBConnection();
 		db.init();
