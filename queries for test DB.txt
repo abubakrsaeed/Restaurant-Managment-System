@@ -1,4 +1,4 @@
-USE rms_test_database;
+// Queries
 
 Create table users (
 name varchar(50),
@@ -8,33 +8,43 @@ salary int not null,
 usertype ENUM('manager', 'employee')
 );
 
-
-INSERT INTO users (name, username, password, salary, usertype) VALUES ('manager', 'manager', 'manager', 0, 'manager');
-INSERT INTO users (name, username, password, salary, usertype) VALUES ('employee', 'employee', 'employee', 2000, 'employee');
-
-
-select * from `users`;
-
+INSERT INTO users (name, username, password, salary, usertype) VALUES ('Sefa Senlik', 'sefasenlik', '12345', 2400, 'employee');
+INSERT INTO users VALUES ('Bilal Raza', 'bilalraza', '13579', 5900, 'manager');
+INSERT INTO users VALUES ('Abubakr Saeed', 'abubakrsaeed', 'qwerty', 2450, 'employee');
+INSERT INTO users VALUES ('Jabagh Anjouk', 'jabaghanjouk', '112233', 2400, 'employee');
+INSERT INTO users VALUES ('Asad Rana', 'asadrana', 'abc123', 2450, 'employee');
 
 CREATE TABLE menu(
 id INT NOT NULL PRIMARY KEY, 
 name VARCHAR(50),
-price INT 
+price DOUBLE(10,2) 
 );
 
+INSERT INTO menu (id, name, price) VALUES (101, "Hamburger", 5.50);
+INSERT INTO menu VALUES (102, "Pizza", 13.90);
+INSERT INTO menu VALUES (103, "Lahmacun", 6);
+INSERT INTO menu VALUES (104, "Grilled Steak", 35.50);
+INSERT INTO menu VALUES (105, "Ezogelin Soup", 3.95);
+INSERT INTO menu VALUES (201, "Coke", 5.95);
+INSERT INTO menu VALUES (202, "Fanta", 5.95);
+INSERT INTO menu VALUES (203, "Ayran", 3.95);
+INSERT INTO menu VALUES (204, "Water", 1.95);
+INSERT INTO menu VALUES (205, "Mineral Water", 2.40);   
+INSERT INTO menu VALUES (206, "Beer", 16.95);
+INSERT INTO menu VALUES (301, "Brownie", 11);
+INSERT INTO menu VALUES (302, "Cake", 13.50);
+INSERT INTO menu VALUES (303, "Chocolate Cookies", 6.95);
+INSERT INTO menu VALUES (401, "Fries", 7.10);
+INSERT INTO menu VALUES (402, "Nuggets", 8.50);
 
-
-INSERT INTO menu (id, name, price) VALUES (1, "Coke", 10);
-INSERT INTO menu VALUES (2, "Pepsi", 20);
-INSERT INTO menu VALUES (3, "Lays", 30);
-INSERT INTO menu VALUES (4, "Fanta", 15);
-
-select * from `menu`;
-
-
-CREATE TABLE order_(
-order_no INT PRIMARY KEY NOT NULL UNIQUE ,
+CREATE TABLE orders (
+orderno INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 name VARCHAR(50),
 qty INT,
-placedBy VARCHAR(50)
+placedby VARCHAR(50) 
 );
+
+INSERT INTO orders (orderno, name, qty, placedby) VALUES (NULL, "Pizza", 2, "sefasenlik");
+INSERT INTO orders VALUES (NULL, "Beer", 3, "asadrana");
+INSERT INTO orders VALUES (NULL, "Lahmacun", 2, "jabaghanjouk");
+INSERT INTO orders VALUES (NULL, "Ayran", 2, "jabaghanjouk");
